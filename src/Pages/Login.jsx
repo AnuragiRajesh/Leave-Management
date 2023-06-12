@@ -55,7 +55,7 @@ const Login = () => {
       
     loginApi({
         email:email,
-        password,password
+        password:password
       }).then((response) => {
         console.log(response.data);
         
