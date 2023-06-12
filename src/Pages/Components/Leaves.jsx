@@ -179,14 +179,14 @@ const navigate = useNavigate();
       <div>
 
              {/* Filter Implementation */}
-        <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "3rem", marginTop: "1rem" }}>
-          <div><button style={{ width: "250px", height: "40px", borderRadius: "5px" }} onClick={() => {
+        <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "1rem", marginTop: "1rem" }}>
+          <div><button style={{ width: "250px", height: "40px", borderRadius: "5px", borderColor:"green" , fontWeight:"bold"}} onClick={() => {
             handleOpenModal();
           }}>Apply For a Leave ++</button></div>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <label>
-                <select style={{ width: "280px", height: "40px", border: "solid black 2px", borderRight: "none", borderRadius: "5px" }} value={filterOption} onChange={handleFilterChange}>
+                <select style={{ width: "280px", height: "40px", border: "solid green 2px", fontWeight:"bold", borderRight: "none", borderRadius: "5px" }} value={filterOption} onChange={handleFilterChange}>
                   <option value="">Select an option</option>
                   <option value="currentMonth">Current Month</option>
                   <option value="lastMonth">Last Month</option>
@@ -197,9 +197,9 @@ const navigate = useNavigate();
               </label>
               <div>
                 {filterApplied ? (
-                  <button style={{ height: "40px", borderRadius: "5px" ,backgroundColor:"red"}} onClick={handleRemoveFilter}>Remove Filter X</button>
+                  <button style={{ height: "40px", fontWeight:"bold",borderColor:"green", borderRadius: "5px" ,backgroundColor:"red"}} onClick={handleRemoveFilter}>Remove Filter X</button>
                 ) : (
-                  <button style={{ height: "40px", borderRadius: "5px" }} onClick={handleApplyFilter}>Apply Filter</button>
+                  <button style={{ height: "40px",fontWeight:"bold",borderColor:"green", borderRadius: "5px" }} onClick={handleApplyFilter}>Apply Filter</button>
                 )}
               </div></div>
             {filterOption === 'custom' && (
@@ -225,7 +225,7 @@ const navigate = useNavigate();
           <div>
             <h3>Upcoming Leaves</h3>
 
-             <UpcomingLeavesTable columns={columns} data={upcomingLeaves}  getAllLeaves={ getAllLeaves} updateButton={true} />
+             <UpcomingLeavesTable columns={columns} data={upcomingLeaves}  getAllLeaves={ getAllLeaves}  />
             {upcomingLeaves.length === 0 ? (
               <p>No upcoming leaves.</p>
             ) : (<p></p>)}
@@ -239,7 +239,7 @@ const navigate = useNavigate();
           <div>
             <h3>Past Leaves</h3>
 
-            <UpcomingLeavesTable columns={columns} data={pastLeaves}  getAllLeaves={ getAllLeaves} updateButton={false} />
+            <UpcomingLeavesTable columns={columns} data={pastLeaves}  getAllLeaves={ getAllLeaves}  />
             {pastLeaves.length === 0 ? (
               <p>No past leaves.</p>
             ) : (<p></p>)}

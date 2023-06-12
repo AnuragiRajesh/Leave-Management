@@ -95,6 +95,9 @@ form{
   width: 80%;
   table-layout: fixed;
 }
+.modelInputFields{
+  display:"flex"; gap:"1rem"; justify-content:"center"
+}
 
 
 .leave-table th,

@@ -5,7 +5,7 @@ import { deleteLeaveApi } from '../../Services/LeaveService';
 import { useNavigate } from 'react-router-dom';
 import UpdateLeave from './UpdateLeave'
 import { updateLeaveApi } from '../../Services/LeaveService';
-const UpcomingLeavesTable = ({ columns, data,getAllLeaves, updateButton}) => {
+const UpcomingLeavesTable = ({ columns, data,getAllLeaves}) => {
     const navigate = useNavigate();
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [row, setRow] = useState('');
@@ -55,11 +55,7 @@ const UpcomingLeavesTable = ({ columns, data,getAllLeaves, updateButton}) => {
               <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
             ))}
             <td>
-            { updateButton ? (
-              <><button onClick={() =>  editHandleOpenModal(row)}>edit</button><button onClick={() => deleteLeave(rowId)}>delete</button></>
-                
-            ) : (<button onClick={() => deleteLeave(rowId)}>delete</button>)}
-              
+            <button className="btn btn-primary btn-sm" onClick={() =>  editHandleOpenModal(row)}>edit</button><button className="btn btn-danger btn-sm" onClick={() => deleteLeave(rowId)}>delete</button>
               
               
             </td>
@@ -124,8 +120,8 @@ const deleteLeave = (id)=>{
         <TableHeader />
         <TableBody />
       </table>
-      <div style={{textAlign:"center"}}>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+      <div style={{textAlign:"center", marginTop:"5px"}}>
+        <button style={{borderRadius:"5px",fontWeight:"bold", borderColor:"green"}} onClick={() => previousPage()} disabled={!canPreviousPage}>
           Previous
         </button>
         <span>
@@ -134,7 +130,7 @@ const deleteLeave = (id)=>{
             {pageIndex + 1} of {page.length}
           </strong>
         </span>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        <button style={{borderRadius:"5px", borderColor:"green", fontWeight:"bold" ,width:"80px"}}  onClick={() => nextPage()} disabled={!canNextPage}>
           Next
         </button>
       </div>

@@ -25,6 +25,7 @@ export const registerApi = async (data) => {
   // https://zsrzpuksbzimwhxqlddb.supabase.co/rest/v1/leaves
 
   export const getLeaveApi = async (data) => {
+    console.log(ACCESS_TOKEN,"while calliing the getLeaves Api")
     return axios.get(`${API_BASE_URL}/rest/v1/leaves?select=*`, {
         headers: {
           'Content-Type': 'application/json',

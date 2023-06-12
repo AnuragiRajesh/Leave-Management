@@ -73,15 +73,15 @@ const Login = () => {
        
        <div className='container-form-fields' > <div style={{ width:"100%"}}>
         <input type="email" className='form-fields' value={email} onChange={handleEmailChange} placeholder='   Email' />
-          {emailError && <p style={{color:"red",marginLeft:"2rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{emailError}</p>}
+          {emailError && <p style={{color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{emailError}</p>}
         
         </div>  
         <div style={{ width:"100%"}}>
 
           <input className='form-fields' type="password" value={password} onChange={handlePasswordChange} placeholder='Password' />
-          {passwordError && <p style={{ color:"red",marginLeft:"2rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
+          {passwordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
         </div>
-         <div style={{paddingLeft:"2rem", paddingTop:'15px' , textAlign:"left"}}><a href='/register'>Don't have an account?</a></div>
+         <div style={{paddingLeft:"3rem", paddingTop:'15px' , textAlign:"left"}}><a href='/register'>Don't have an account?</a></div>
         <button className='Submit-btn' type="submit">Login</button>
       </form>
     </div>

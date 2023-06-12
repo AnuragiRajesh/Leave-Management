@@ -3,7 +3,6 @@ import { logoutApi } from '../../Services/LeaveService';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 // import getLeaveApi from ""
-import { clear } from '@testing-library/user-event/dist/clear';
 const Navbarcomponent = () => {
     const navigate = useNavigate();
     const logout = ()=>{
@@ -39,13 +38,13 @@ const Navbarcomponent = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
               <li className="nav-item active">
-                  <h5>< Link className="nav-link" to="">My-Leaves</Link></h5>
+                  <h5>< Link className="nav-link" style={{fontWeight:"bolder"}} to="">My-Leaves</Link></h5>
               </li>
               <li className="nav-item">
-                  <h5>< Link className="nav-link" to="calendar">Calender</Link></h5>
+                  <h5>< Link className="nav-link" style={{fontWeight:"bolder"}} to="calendar">Calender</Link></h5>
               </li>
               <li className="nav-item">
-                  <h5><button onClick={logout} className="nav-link" href="#portfolio">Logout</button></h5>
+                  <h5><button onClick={logout} style={{fontWeight:"bolder"}} className="nav-link" >Logout</button></h5>
               </li>
              
           </ul>

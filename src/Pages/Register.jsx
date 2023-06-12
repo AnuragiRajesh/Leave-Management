@@ -61,6 +61,7 @@ registerApi({
         console.log(response.data);
         localStorage.setItem("Access Token", response.data.access_token)
         localStorage.setItem("Refresh Token", response.data.refresh_token)
+        setInvalidLoginCredentials("Successfully registered please confirm your mail")
         navigate('/login');
         setEmail('');
         setPassword('');
@@ -84,24 +85,24 @@ registerApi({
   return (
     <div className="App">
       <form   onSubmit={handleSubmit}>
-      <p style={{color:"red"}}>{invalidLoginCredentials}</p>
+      <p style={{color:"green" , backgroundColor:"red"}}>{invalidLoginCredentials}</p>
       <h2>Leave Management</h2>
        
        <div className='container-form-fields' > <div style={{ width:"100%"}}>
         <input type="email" className='form-fields' value={email} onChange={handleEmailChange} placeholder='   Email' />
-          {emailError && <p style={{color:"red",marginLeft:"2rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{emailError}</p>}
+          {emailError && <p style={{color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{emailError}</p>}
         
         </div>  
         <div style={{ width:"100%"}}>
 
           <input className='form-fields' type="password" value={password} onChange={handlePasswordChange} placeholder='Password' />
-          {passwordError && <p style={{ color:"red",marginLeft:"2rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
+          {passwordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
           <div style={{ width:"100%"}}>
 
           <input className='form-fields' type="password" value={confirmPassword} onChange={handleReEnterPasswordChange} placeholder='Re Enter Password' />
-          {confirmPasswordError && <p style={{ color:"red",marginLeft:"2rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}> {confirmPasswordError}</p>}</div>
+          {confirmPasswordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}> {confirmPasswordError}</p>}</div>
         </div>
-         <div style={{paddingLeft:"2rem", paddingTop:'15px' , textAlign:"left"}}><a href='/'>Already have an account?</a></div>
+         <div style={{paddingLeft:"3rem", paddingTop:'1px' , textAlign:"left"}}><a href='/'>Already have an account?</a></div>
         <button className='Submit-btn' type="submit">Register</button>
       </form>
     </div>
