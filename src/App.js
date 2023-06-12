@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import CalendarCom from './Pages/Components/Calender';
 import ShowLeaves from './Pages/Components/Leaves';
-import RequestLeave from './Pages/Components/ReqLeave';
+// import RequestLeave from './Pages/Components/ReqLeave';
 import Register from './Pages/Register'
 import Login from './Pages/Login';
 import Home from './Pages/home';

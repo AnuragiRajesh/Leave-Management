@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import '../App.css'
+// import { useCookies } from 'react-cookie';
 import { loginApi } from '../Services/LeaveService';
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,8 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [invalidLoginCredentials,setInvalidLoginCredentials]= useState('')
+  // const [cookies, setCookie] = useCookies(['cookie-name']);
+  // const [cookieValue, setCookieValue] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -18,7 +21,9 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
+  // const handleSetCookie = () => {
+   
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,12 +49,17 @@ const Login = () => {
     if (isValid) {
       // Add your login logic here
       //   console.log(jsonData);
+
+
+
+      
     loginApi({
         email:email,
         password,password
       }).then((response) => {
         console.log(response.data);
-        localStorage.setItem("Access_Token", response.data.access_token)
+        
+        localStorage.setItem('Access_Token', response.data.access_token)
         localStorage.setItem("Refresh Token", response.data.refresh_token)
         navigate('/home');
         setEmail('');
@@ -69,7 +79,7 @@ const Login = () => {
     <div className="App">
       <form   onSubmit={handleSubmit}>
         <p style={{color:"red"}}>{invalidLoginCredentials}</p>
-      <h2>Leave Management</h2>
+      <h2 style={{marginBottom:"20px"}}>Leave Management</h2>
        
        <div className='container-form-fields' > <div style={{ width:"100%"}}>
         <input type="email" className='form-fields' value={email} onChange={handleEmailChange} placeholder='   Email' />
@@ -81,7 +91,7 @@ const Login = () => {
           <input className='form-fields' type="password" value={password} onChange={handlePasswordChange} placeholder='Password' />
           {passwordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
         </div>
-         <div style={{paddingLeft:"3rem", paddingTop:'15px' , textAlign:"left"}}><a href='/register'>Don't have an account?</a></div>
+         <div style={{paddingLeft:"3rem", paddingTop:'2px' , textAlign:"left"}}><a href='/register'>Don't have an account?</a></div>
         <button className='Submit-btn' type="submit">Login</button>
       </form>
     </div>

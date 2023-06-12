@@ -86,7 +86,7 @@ registerApi({
     <div className="App">
       <form   onSubmit={handleSubmit}>
       <p style={{color:"green" , backgroundColor:"red"}}>{invalidLoginCredentials}</p>
-      <h2>Leave Management</h2>
+      <h2 style={{marginBottom:"20px"}}>Leave Management</h2>
        
        <div className='container-form-fields' > <div style={{ width:"100%"}}>
         <input type="email" className='form-fields' value={email} onChange={handleEmailChange} placeholder='   Email' />

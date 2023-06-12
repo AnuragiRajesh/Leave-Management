@@ -1,12 +1,12 @@
-import React, { useMemo,useState } from 'react';
+import React, { useState } from 'react';
 import { useTable, usePagination } from 'react-table';
 import "../../App.css"
 import { deleteLeaveApi } from '../../Services/LeaveService';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import UpdateLeave from './UpdateLeave'
 import { updateLeaveApi } from '../../Services/LeaveService';
 const UpcomingLeavesTable = ({ columns, data,getAllLeaves}) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [row, setRow] = useState('');
     const [selectedRow, setSelectedRow] = useState(null);

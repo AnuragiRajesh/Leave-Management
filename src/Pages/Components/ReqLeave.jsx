@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 // import axios from 'axios';
 
 
 const RequestLeave = ({ isOpen, closeModal, handleYesClick }) => {
-  console.log("kiii")
+  console.log("Req Com")
   const [start_date, setStart_date] = useState('');
   const [end_date, setEnd_date] = useState('');
   const [reason, setReason] = useState('');

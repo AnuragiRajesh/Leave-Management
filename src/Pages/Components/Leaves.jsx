@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { getLeaveApi } from '../../Services/LeaveService';
-import ReactPaginate from 'react-paginate';
 import RequestLeave from './ReqLeave';
 import { requestLeaveApi } from '../../Services/LeaveService';
-import { useNavigate } from 'react-router-dom';
 import "../../App.css"
 import UpcomingLeavesTable from './Table';
 const ShowLeaves = () => {
   const [reqModalIsOpen, setReqModalIsOpen] = useState(false);
-  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [filterOption, setFilterOption] = useState('');
   const [customStartDate, setCustomStartDate] = useState('');
   const [customEndDate, setCustomEndDate] = useState('');
   const [leaveData, setLeaveData] = useState([]);
   const [leaveDataSource, setPastLeaveDataSource] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
-  const [leaveId_Prop, setLeaveId_Prop] = useState({});
-const navigate = useNavigate();
+  const [showRequestLeaveModal, setShowRequestLeaveModal] = useState(false);
  
   useEffect(() => {
     getAllLeaves()
@@ -33,8 +29,8 @@ const navigate = useNavigate();
       alert(
         error.response.data.message
       )
-      localStorage.clear()
-      navigate("/")
+      // localStorage.clear()
+      // navigate("/")
       console.log(error.response.data.message, "koko");
     });
 
@@ -133,9 +129,9 @@ const navigate = useNavigate();
     setFilterOption(event.target.value);
     setFilterApplied(false);
   };
-  const handleFilterSubmit = () => {
-    filterLeaves(filterOption);
-  };
+  // const handleFilterSubmit = () => {
+  //   filterLeaves(filterOption);
+  // };
   const handleApplyFilter = () => {
     filterLeaves(filterOption);
     if (!filterOption) {
@@ -152,16 +148,17 @@ const navigate = useNavigate();
 // Request a Leave
   const handleOpenModal = () => {
     setReqModalIsOpen(true);
+    setShowRequestLeaveModal(true);
   };
   const handleCloseModal = () => {
     setReqModalIsOpen(false);
+    setShowRequestLeaveModal(false);
   };
   const handleYesClick = (start_date, end_date, reason) => {
     console.log(start_date, end_date, reason)
     requestLeaveApi({ start_date: start_date, end_date: end_date, reason: reason }).then((response) => {
       alert("Applied a leave Successfully")
       console.log(response.config.data);
-
       getAllLeaves()
     })
       .catch((error) => {
@@ -182,7 +179,14 @@ const navigate = useNavigate();
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "1rem", marginTop: "1rem" }}>
           <div><button style={{ width: "250px", height: "40px", borderRadius: "5px", borderColor:"green" , fontWeight:"bold"}} onClick={() => {
             handleOpenModal();
-          }}>Apply For a Leave ++</button></div>
+          }}>Apply For a Leave ++</button>
+          {showRequestLeaveModal && (
+            <RequestLeave
+              isOpen={reqModalIsOpen}
+              closeModal={handleCloseModal}
+              handleYesClick={handleYesClick}
+            />
+          )}</div>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <label>
@@ -250,11 +254,7 @@ const navigate = useNavigate();
 
 
       {/* Request a Leave Implementation */}
-      <RequestLeave
-        isOpen={reqModalIsOpen}
-        closeModal={handleCloseModal}
-        handleYesClick={handleYesClick}
-      />
+     
       <div>
      
     </div> </React.Fragment>
