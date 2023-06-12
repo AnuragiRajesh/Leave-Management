@@ -41,9 +41,9 @@ function Calendar() {
                     center: "title",
                     end: "dayGridMonth,timeGridWeek,timeGridDay", // will normally be on the right. if RTL, will be on the left
                 }}
-                height={"70vh"}
+                height={"90vh"}
                 events={events}
-                eventBackgroundColor="red"
+                eventBackgroundColor="green"
                 eventDidMount={(info) => {
                     return new bootstrap.Popover(info.el, {
                         title: info.event.title,

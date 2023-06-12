@@ -46,6 +46,7 @@ export const registerApi = async (data) => {
   };
 
   export const deleteLeaveApi = async (id) => {
+    console.log(id,"here we go")
     return axios.delete(`https://zsrzpuksbzimwhxqlddb.supabase.co/rest/v1/leaves?id=eq.${id}`,{
         headers: {
           'Content-Type': 'application/json',
@@ -57,6 +58,15 @@ export const registerApi = async (data) => {
   }
   export const logoutApi = async (id) => {
     return axios.post(`https://zsrzpuksbzimwhxqlddb.supabase.co/auth/v1/logout`,{
+        headers: {
+        'apikey': API_KEY,
+          'Authorization': `Bearer ${ACCESS_TOKEN}`,
+
+        },
+      });
+  };
+  export const updateLeaveApi = async (data,id) => {
+    return axios.patch(`https://zsrzpuksbzimwhxqlddb.supabase.co/rest/v1/leaves?id=eq.${id}`,data,{
         headers: {
         'apikey': API_KEY,
           'Authorization': `Bearer ${ACCESS_TOKEN}`,

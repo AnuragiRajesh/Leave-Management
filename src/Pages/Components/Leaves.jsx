@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { getLeaveApi } from '../../Services/LeaveService';
 import ReactPaginate from 'react-paginate';
-import { useNavigate } from 'react-router-dom';
 import RequestLeave from './ReqLeave';
-import UpdateLeave from './UpdateLeave';
 import { requestLeaveApi } from '../../Services/LeaveService';
+import { useNavigate } from 'react-router-dom';
 import "../../App.css"
+import UpcomingLeavesTable from './Table';
 const ShowLeaves = () => {
   const [reqModalIsOpen, setReqModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [filterOption, setFilterOption] = useState('');
-  // const [filteredData, setFilteredData] = useState([]);
   const [customStartDate, setCustomStartDate] = useState('');
   const [customEndDate, setCustomEndDate] = useState('');
   const [leaveData, setLeaveData] = useState([]);
   const [leaveDataSource, setPastLeaveDataSource] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
   const [leaveId_Prop, setLeaveId_Prop] = useState({});
+const navigate = useNavigate();
  
   useEffect(() => {
     getAllLeaves()
@@ -25,6 +25,7 @@ const ShowLeaves = () => {
 
   const getAllLeaves = () => getLeaveApi().then((response) => {
     const data = response.data
+    console.log("njjjjjjjjjjjjjjjjjjjjjjjjj",data)
     setPastLeaveDataSource(data)
     setLeaveData(data);
   })
@@ -32,7 +33,8 @@ const ShowLeaves = () => {
       alert(
         error.response.data.message
       )
-      // navigate("/")
+      localStorage.clear()
+      navigate("/")
       console.log(error.response.data.message, "koko");
     });
 
@@ -48,6 +50,23 @@ const ShowLeaves = () => {
   )
 
 
+  const columns = [
+    {
+      Header: 'Start Date',
+      accessor: 'start_date',
+    },
+    {
+      Header: 'End Date',
+      accessor: 'end_date',
+    },
+    {
+      Header: 'Reason',
+      accessor: 'reason',
+    },
+    
+    
+  ];
+  
 
 
   const filterLeaves = (option) => {
@@ -140,6 +159,7 @@ const ShowLeaves = () => {
   const handleYesClick = (start_date, end_date, reason) => {
     console.log(start_date, end_date, reason)
     requestLeaveApi({ start_date: start_date, end_date: end_date, reason: reason }).then((response) => {
+      alert("Applied a leave Successfully")
       console.log(response.config.data);
 
       getAllLeaves()
@@ -152,22 +172,7 @@ const ShowLeaves = () => {
   };
 
 
-//Edit a Leave
 
-  const editHandleYesClick = (particularLeave) => {
-    console.log(particularLeave)
-    setEditModalIsOpen(false);
-  };
-  const editHandleOpenModal = (leave) => {
-
-    setLeaveId_Prop(leave)
-    console.log(leaveId_Prop)
-
-    setEditModalIsOpen(true);
-  };
-  const edithandleCloseModal = () => {
-    setEditModalIsOpen(false);
-  };
   return (
     <React.Fragment>
 
@@ -192,7 +197,7 @@ const ShowLeaves = () => {
               </label>
               <div>
                 {filterApplied ? (
-                  <button style={{ height: "40px", borderRadius: "5px" }} onClick={handleRemoveFilter}>Remove Filter X</button>
+                  <button style={{ height: "40px", borderRadius: "5px" ,backgroundColor:"red"}} onClick={handleRemoveFilter}>Remove Filter X</button>
                 ) : (
                   <button style={{ height: "40px", borderRadius: "5px" }} onClick={handleApplyFilter}>Apply Filter</button>
                 )}
@@ -220,30 +225,7 @@ const ShowLeaves = () => {
           <div>
             <h3>Upcoming Leaves</h3>
 
-            <table className="leave-table" style={{ margin: 'auto' }}>
-              <thead>
-                <tr>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Reason</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {upcomingLeaves.map((leave) => (
-                  <tr key={leave.id}>
-                    <td>{leave.start_date}</td>
-                    <td>{leave.end_date}</td>
-                    <td>{leave.reason}</td>
-                    <td ><button className="btn btn-primary" onClick={() => {
-                      editHandleOpenModal(leave)
-                    }}> Edit</button><button className="btn btn-danger" onClick={() => {
-                      handleOpenModal();
-                    }} >Delete</button> </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+             <UpcomingLeavesTable columns={columns} data={upcomingLeaves}  getAllLeaves={ getAllLeaves} updateButton={true} />
             {upcomingLeaves.length === 0 ? (
               <p>No upcoming leaves.</p>
             ) : (<p></p>)}
@@ -257,28 +239,7 @@ const ShowLeaves = () => {
           <div>
             <h3>Past Leaves</h3>
 
-            <table className="leave-table" style={{ margin: 'auto' }}>
-              <thead>
-                <tr>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Reason</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pastLeaves.map((leave) => (
-                  <tr key={leave.id}>
-                    <td>{leave.start_date}</td>
-                    <td>{leave.end_date}</td>
-                    <td>{leave.reason}</td>
-                    <td><button onClick={() => {
-                      handleOpenModal();
-                    }} className="btn btn-danger">Delete</button></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <UpcomingLeavesTable columns={columns} data={pastLeaves}  getAllLeaves={ getAllLeaves} updateButton={false} />
             {pastLeaves.length === 0 ? (
               <p>No past leaves.</p>
             ) : (<p></p>)}
@@ -294,14 +255,9 @@ const ShowLeaves = () => {
         closeModal={handleCloseModal}
         handleYesClick={handleYesClick}
       />
-      {/* Update a Leave Implementation */}
-      <UpdateLeave
-        isOpen={editModalIsOpen}
-        closeModal={edithandleCloseModal}
-        editHandleYesClick={editHandleYesClick}
-
-        leaveId_Prop={leaveId_Prop}
-      />   </React.Fragment>
+      <div>
+     
+    </div> </React.Fragment>
   );
 };
 

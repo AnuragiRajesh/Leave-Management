@@ -22,7 +22,7 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/home' element={<Home/>} >
             <Route path="" element={<ShowLeaves />} />
-            <Route path="calendar" element={<RequestLeave />} />
+            <Route path="calendar" element={<CalendarCom />} />
             {/* <Route path="home/requestleave" element={<RequestLeave />} /> */}
         </Route>
     </Routes>

@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 
 
 const RequestLeave = ({ isOpen, closeModal, handleYesClick }) => {
+  console.log("kiii")
   const [start_date, setStart_date] = useState('');
   const [end_date, setEnd_date] = useState('');
   const [reason, setReason] = useState('');

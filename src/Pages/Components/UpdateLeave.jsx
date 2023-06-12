@@ -3,27 +3,30 @@ import Modal from 'react-modal';
 // import axios from 'axios';
 
 
-const UpdateLeave = ({ isOpen, closeModal, editHandleYesClick,leaveId_Prop }) => {
-  console.log(leaveId_Prop,"its coming here")
-  const [particularLeave, setParticularLeave] = useState(leaveId_Prop);
-
+const UpdateLeave = ({ isOpen, closeModal, editHandleYesClick,row}) => {
+  console.log(row,"ppp")
+  const [reason, setReason] = useState(row.reason);
+  const [start_date, setStart_date] = useState(row.start_date);
+  const [end_date, setEnd_date] = useState(row.end_date);
   const handleInput1Change = (e) => {
-    // setStart_date(e.target.value);
+    setStart_date(e.target.value);
   };
 
   const handleInput2Change = (e) => {
-    // setEnd_date(e.target.value);
+    setEnd_date(e.target.value);
   };
 
   const handleInput3Change = (e) => {
-    // 
-    // setReason(e.target.value);
-  };
-  const editHandleYesClickWithInputs = () => {
-    console.log("ghgh")
-    editHandleYesClick(particularLeave);
-    // setParticularLeave('')
     
+    setReason(e.target.value);
+  };
+  const handleYesClickWithInputs = () => {
+    
+    editHandleYesClick(start_date,end_date,reason,row.id);
+    setStart_date('')
+    setEnd_date('')
+    setReason('')
+    closeModal()
   };
 
 
@@ -60,10 +63,10 @@ const UpdateLeave = ({ isOpen, closeModal, editHandleYesClick,leaveId_Prop }) =>
       overlayClassName="custom-modal-overlay">
       <h2>Confirmation</h2>
       <p>Are you sure you want to perform this action?</p>
-      <input type="date" value={particularLeave.start_date} onChange={handleInput1Change} />
-      <input type="date" value={particularLeave.end_date} onChange={handleInput2Change} />
-      <input type="text" value={particularLeave.reason} onChange={handleInput3Change} />
-      <button onClick={editHandleYesClickWithInputs}>Yes</button>
+      <input type="date" value={start_date} onChange={handleInput1Change} />
+      <input type="date" value={end_date} onChange={handleInput2Change} />
+      <input type="text" value={reason} onChange={handleInput3Change} />
+      <button onClick={handleYesClickWithInputs}>Yes</button>
       <button onClick={closeModal}>No</button>
     </Modal>
   );
