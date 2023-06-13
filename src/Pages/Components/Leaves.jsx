@@ -3,7 +3,7 @@ import { getLeaveApi } from '../../Services/LeaveService';
 import RequestLeave from './ReqLeave';
 import { requestLeaveApi } from '../../Services/LeaveService';
 import "../../App.css"
-import UpcomingLeavesTable from './Table';
+import LeavesTable from './Table';
 const ShowLeaves = () => {
   const [reqModalIsOpen, setReqModalIsOpen] = useState(false);
   const [filterOption, setFilterOption] = useState('');
@@ -21,7 +21,6 @@ const ShowLeaves = () => {
 
   const getAllLeaves = () => getLeaveApi().then((response) => {
     const data = response.data
-    console.log("njjjjjjjjjjjjjjjjjjjjjjjjj",data)
     setPastLeaveDataSource(data)
     setLeaveData(data);
   })
@@ -29,8 +28,6 @@ const ShowLeaves = () => {
       alert(
         error.response.data.message
       )
-      // localStorage.clear()
-      // navigate("/")
       console.log(error.response.data.message, "koko");
     });
 
@@ -75,7 +72,6 @@ const ShowLeaves = () => {
     }
 
     if (filterOption === 'custom') {
-      console.log(customStartDate, customEndDate)
       const customStartDate2 = new Date(customStartDate);
       const customEndDate2 = new Date(customEndDate);
 
@@ -88,7 +84,7 @@ const ShowLeaves = () => {
           leaveEndDate <= customEndDate2
         );
       });
-      console.log(filteredLeaves, "cutomes dates done")
+      // console.log(filteredLeaves, "cutomes dates done")
     }
 
 
@@ -119,7 +115,7 @@ const ShowLeaves = () => {
 
       return leaveStartDate >= startDate && leaveEndDate <= endDate;
     });
-    console.log(filteredLeaves, "Finally")
+    // console.log(filteredLeaves, "Finally")
     setLeaveData(filteredLeaves);
   };
 
@@ -155,15 +151,14 @@ const ShowLeaves = () => {
     setShowRequestLeaveModal(false);
   };
   const handleYesClick = (start_date, end_date, reason) => {
-    console.log(start_date, end_date, reason)
     requestLeaveApi({ start_date: start_date, end_date: end_date, reason: reason }).then((response) => {
       alert("Applied a leave Successfully")
-      console.log(response.config.data);
+      // console.log(response.config.data);
       getAllLeaves()
     })
       .catch((error) => {
         alert(error.response.data.message)
-        console.log(error.response.data.message, "koko");
+        // console.log(error.response.data.message);
       });
     setReqModalIsOpen(false);
   };
@@ -229,9 +224,9 @@ const ShowLeaves = () => {
           <div>
             <h3>Upcoming Leaves</h3>
 
-             <UpcomingLeavesTable columns={columns} data={upcomingLeaves}  getAllLeaves={ getAllLeaves}  />
+             <LeavesTable columns={columns} data={upcomingLeaves}  getAllLeaves={ getAllLeaves}  />
             {upcomingLeaves.length === 0 ? (
-              <p>No upcoming leaves.</p>
+               <h4 style={{padding:"5rem"}}>No Upcoming leaves.</h4>
             ) : (<p></p>)}
           </div>
 {/* Upcopming Leaves Finish */}
@@ -243,9 +238,9 @@ const ShowLeaves = () => {
           <div>
             <h3>Past Leaves</h3>
 
-            <UpcomingLeavesTable columns={columns} data={pastLeaves}  getAllLeaves={ getAllLeaves}  />
+            <LeavesTable columns={columns} data={pastLeaves}  getAllLeaves={ getAllLeaves}  />
             {pastLeaves.length === 0 ? (
-              <p>No past leaves.</p>
+              <h4 style={{padding:"5rem"}}>No Past leaves</h4>
             ) : (<p></p>)}
           </div>
         </div>

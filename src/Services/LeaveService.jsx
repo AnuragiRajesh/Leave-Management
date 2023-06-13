@@ -44,7 +44,7 @@ export const registerApi = async (data) => {
   };
 
   export const deleteLeaveApi = async (id) => {
-    console.log(id,"here we go")
+    // console.log(id,"here we go")
     return axios.delete(`${API_BASE_URL}/rest/v1/leaves?id=eq.${id}`,{
         headers: {
           'Content-Type': 'application/json',

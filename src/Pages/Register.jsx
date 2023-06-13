@@ -46,7 +46,6 @@ const Register = () => {
       isValid = false;
     }
     if (password!==confirmPassword) {
-      console.log("juju")
       setConfirmPasswordError('Password did not match');
       isValid = false;
     }
@@ -56,36 +55,42 @@ const Register = () => {
       // Add your Register logic here
 registerApi({
   email:email,
-  password,password
+  password:password
 }).then((response) => {
-        console.log(response.data);
-        localStorage.setItem("Access Token", response.data.access_token)
+        // console.log(response.data);
+        localStorage.setItem('Access Token', response.data.access_token)
         localStorage.setItem("Refresh Token", response.data.refresh_token)
         setInvalidLoginCredentials("Successfully registered please confirm your mail")
-        navigate('/login');
-        setEmail('');
-        setPassword('');
+        setTimeout(() => {
+          setInvalidLoginCredentials('')
+          navigate('/login');
+          setEmail('');
+          setPassword('');
+          setConfirmPassword("")
+          }, 3000);
+          // console.log(error.response.data.error_description,"koko");
+        
+        // setEmail('');
+        // setPassword('');
       })
       .catch((error) => {
         setInvalidLoginCredentials(error.response.data.error_description)
         setTimeout(() => {
         setInvalidLoginCredentials('')
         }, 3000);
-        console.log(error.response.data.error_description,"koko");
+        // console.log(error.response.data.error_description);
       });
       console.log('Email:', email);
       console.log('Password:', password);
       // Reset the form
-      setEmail('');
-      setPassword('');
-      setConfirmPassword("")
+     
     }
   };
 
   return (
     <div className="App">
       <form   onSubmit={handleSubmit}>
-      <p style={{color:"green" , backgroundColor:"red"}}>{invalidLoginCredentials}</p>
+      <p style={{color:"red" ,}}>{invalidLoginCredentials}</p>
       <h2 style={{marginBottom:"20px"}}>Leave Management</h2>
        
        <div className='container-form-fields' > <div style={{ width:"100%"}}>

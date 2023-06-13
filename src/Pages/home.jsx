@@ -1,15 +1,16 @@
-import React from 'react';
-import {
-  BrowserRouter as 
- 
-  Outlet,
-} from "react-router-dom";
+import React ,{useState}from 'react';
+import CalendarCom from './Components/Calender';
+import ShowLeaves from './Components/Leaves';
+
 import Navbarcomponent from './Components/Navbar';
 function Home() {
+  const [turn,seTurn] =useState("leaves")
     return (
          <>
-          <Navbarcomponent />
-          <Outlet/>
+          <Navbarcomponent seTurn={seTurn} />
+          {(turn==="leaves")?<ShowLeaves />:<CalendarCom/>}
+    
+  
          </>
      
     );

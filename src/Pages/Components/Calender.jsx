@@ -21,12 +21,12 @@ function Calendar() {
                     end: ele.end_date
                 })
             )
-            console.log(data)
+            // console.log(data)
             setEvents(data);
         })
             .catch((error) => {
                 alert(error.response.data.message)
-                console.log(error.response.data.message, "koko");
+                // console.log(error.response.data.message, "koko");
                 navigate('login')
             });
     }, []);

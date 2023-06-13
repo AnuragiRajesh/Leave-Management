@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 
 
 const UpdateLeave = ({ isOpen, closeModal, editHandleYesClick,row}) => {
-  console.log(row,"ppp")
   const [reason, setReason] = useState(row.reason);
   const [start_date, setStart_date] = useState(row.start_date);
   const [end_date, setEnd_date] = useState(row.end_date);

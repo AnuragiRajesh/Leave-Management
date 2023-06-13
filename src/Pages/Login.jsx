@@ -48,7 +48,6 @@ const Login = () => {
     // Proceed with login if form is valid
     if (isValid) {
       // Add your login logic here
-      //   console.log(jsonData);
 
 
 
@@ -57,7 +56,6 @@ const Login = () => {
         email:email,
         password:password
       }).then((response) => {
-        console.log(response.data);
         
         localStorage.setItem('Access_Token', response.data.access_token)
         localStorage.setItem("Refresh Token", response.data.refresh_token)
@@ -70,7 +68,7 @@ const Login = () => {
         setTimeout(() => {
         setInvalidLoginCredentials('')
         }, 3000);
-        console.log(error.response.data.error_description,"koko");
+        // console.log(error.response.data.error_description,"koko");
       });
     }
   };
