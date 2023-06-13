@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import '../App.css'
-// import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 import { loginApi } from '../Services/LeaveService';
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,8 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [invalidLoginCredentials,setInvalidLoginCredentials]= useState('')
-  // const [cookies, setCookie] = useCookies(['cookie-name']);
-  // const [cookieValue, setCookieValue] = useState('');
+
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -21,9 +20,7 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  // const handleSetCookie = () => {
-   
-  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -89,7 +86,8 @@ const Login = () => {
           <input className='form-fields' type="password" value={password} onChange={handlePasswordChange} placeholder='Password' />
           {passwordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}>{passwordError}</p>}</div>
         </div>
-         <div style={{paddingLeft:"3rem", paddingTop:'2px' , textAlign:"left"}}><a href='/register'>Don't have an account?</a></div>
+         <div style={{paddingLeft:"3rem", paddingTop:'2px' , textAlign:"left"}}>
+         <Link to="/register">Don't have an account?</Link></div>
         <button className='Submit-btn' type="submit">Login</button>
       </form>
     </div>

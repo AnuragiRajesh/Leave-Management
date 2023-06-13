@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import validator from 'validator';
 import { registerApi } from '../Services/LeaveService';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../App.css'
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -107,7 +108,9 @@ registerApi({
           <input className='form-fields' type="password" value={confirmPassword} onChange={handleReEnterPasswordChange} placeholder='Re Enter Password' />
           {confirmPasswordError && <p style={{ color:"red",marginLeft:"3rem", marginTop:"2px" ,display:"flex", textAlign:"left"}}> {confirmPasswordError}</p>}</div>
         </div>
-         <div style={{paddingLeft:"3rem", paddingTop:'1px' , textAlign:"left"}}><a href='/'>Already have an account?</a></div>
+         <div style={{paddingLeft:"3rem", paddingTop:'1px' , textAlign:"left"}}>
+         <Link to="/">Already have an account?</Link>
+          </div>
         <button className='Submit-btn' type="submit">Register</button>
       </form>
     </div>
